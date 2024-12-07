@@ -1,0 +1,28 @@
+Документация vk API: https://dev.vk.com/ru/guide
+
+1. Получаем токен:
+    Вк - страница бота - управление - работа с апи - получаем токен.
+
+2. Вставляем токен в код:
+    token = 'mytoken'
+
+3. Создаем объект для управления ботом:
+    vk = vk_api.VkApi(token=token)
+
+4. Авторизуем токен:
+    vk._auth_token()
+
+В документации заходим в api -> messages -> messages.Conversations
+
+5. Получаем сообщения из чата. 1 аргумент - нужный метод, второй - аргументы метода в виде словаря:
+    messages = vk.method('messages.getConversations', {'count':20, 'filter':'unanswered'})
+
+6. Выводим полученные сообщения:
+    print(messages)
+
+7. Отвечаем на полученные сообщения (все)
+    vk.method('messages.send', {'peer_id': user_id, 'random_id':num_of_message, 'message': 'Ваше сообщение получено!'})
+
+8. Отвечаем на сообщения с определенным текстом:
+    if text_message.lower() == 'привет':
+            vk.method('messages.send', {'peer_id': user_id, 'random_id': num_of_message, 'message': 'Добрый день!'})

@@ -1,0 +1,23 @@
+main_old - старый код с прошлых занятий, сегодня мы его дорабатываем
+
+Кнопки в тг ботах бывают 2-х типов: Inline и Reply. Inline - кнопки под сообщениями, типа "перейти". 
+Reply - кнопки-команды, при нажатии на которые выполняется команда в боте.
+Создаем Reply кнопку:
+1.Создаем клавиатуру:
+    keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=False)
+    row_width - количество столбцов, resize_keyboard - изменяема ли клавиатура, one_time_keyboard - одноразовая ли клавиатура
+2. Создаем кнопку
+    button = telebot.types.KeyboardButton('Факт')
+3. Добавляем кнопку к клавиатуре:
+    keyboard.add(button)
+4. Выводим клавиатуру. К bot.send_message добавляем reply_murkup=keyboard.
+Готово!
+
+Создание Inline кнопки:
+1. Создаем клавиатуру, но немного другую:
+    keyboard = telebot.types.InlineKeyboardMarkup()
+2. Создаем кнопку (опять немного другую)
+    button = telebot.types.InlineKeyboardButton('TEXT КНОПКИ', url = ссылка)
+3. Добавляем на клавиатуру кнопку:
+    keyboard.add(button)
+4. Выводим: К bot.send_message добавляем reply_murkup=keyboard

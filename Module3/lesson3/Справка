@@ -1,0 +1,63 @@
+Технология longpolling - технология, что позволяет получать данные о новых событиях с помощью длинных запросов. Иначе говоря, бот работает только при соблюдении каких-либо условий, что экономит ресурс ПК
+Деплойт - залив веб-сервиса на удаленный сервер (на хостинг, серверную инфраструктуру и тп)
+
+
+Что бы текст выводился точно так же, как и написано в строке, без ошибок, можно использовать вместо 'text'      ''' text '''
+
+
+
+Что бы использовать longpolling, использую переменную:
+    longpoll = VkLongPoll(vk_session)
+
+
+
+Обработчик событий:
+
+        # Создаю обработчик событий (.listen() помогает прослушивать обрабатываемое событие)
+        for event in longpoll.listen():
+            
+            # Проверяю, что если пришло именно сообщение:
+            if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+                
+                # Обрабатываю сообщение (получаю его текст)
+                msg = event.text.lower()
+
+                # Получаю id пользователя, который отправил сообщение
+                user_id = event.user_id
+                
+                # Создаем случайный id для бота
+                random_id = random.randint(1, 10_000)
+
+
+
+Если в строке есть слово 'word':
+    if 'word' in msg:
+        
+        Создаю приветственное сообщение:
+        hello_message = f'''Привет! Я BOOOOOOOOOOOT, и могу: 
+                -k : получить курс валют'''
+
+        Отправляю его пользователю:
+        vk.messages.send(user_id = user_id, random_id = random_id, message = hello_message)       
+
+
+
+Деплойт:
+    1. Создаю файл requirements.txt 
+    2. В консоль ввожу:  pip freeze > requirements.txt              (это файл со всеми нашими библиотеками)
+    3. Если у меня установленно много библиотек, то ненужные для веб-приложения из файла удаляем
+    4. Захожу на сайт хостинга (бесплатный - https://www.pythonanywhere.com). Регистрируемся, входим.
+    5. Выбираю dashboard -> files -> задаю имя и нажимаю New directory
+    6. Загружаем необходимые файлы (upload a file)
+    7. Нажимаем Dashboard 
+    8. Нажимаем New console: Bash           (Пользовался termux, так что для меня все просто)
+    9. В открывшейся папке заходим в директорию с проектом (увидеть директории можно командой ls). Пишем cd name_of_directory
+    10. Устанавливаем наши библиотеки: pip install -r requirements.txt.
+            P.S: В случае возникновения ошибки ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the 
+                        following dependency conflicts.selenium 4.1.5 requires urllib3[secure,socks]~=1.26, but you have urllib3 2.2.3 which is incompatible.requests-cache 0.9.4 requires 
+                        urllib3<2.0.0,>=1.25.5, but you have urllib3 2.2.3 which is incompatible. botocore 1.26.3 requires urllib3<1.27,>=1.25.4, but you have urllib3 2.2.3 which is incompatible.
+'               Можно воспользоваться командой  pip install -r requirements.txt --use-deprecated=legacy-resolver  (Мне помогло. Если нет - гугл в помощь)
+
+    11. Запускаем наш проект - python name_of_start_file.py
+    12. Все, красавчик. Можешь затестить) Закрывай ide, браузер и тестируй с мобилы
+    13. Что бы завершить выполнение - в терминале bash нажать ctrl + c
