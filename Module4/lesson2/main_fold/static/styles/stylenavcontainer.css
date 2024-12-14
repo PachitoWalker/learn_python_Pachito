@@ -1,0 +1,58 @@
+.navbar {
+    display: flex;
+    background-color: rgb(29, 28, 28);
+}
+
+.links_nav {
+    display: flex;
+}
+
+.links_nav a {
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    color: white;
+    
+} 
+
+.links_nav a:hover {
+    background-color: rgb(70, 70, 70);
+}
+
+.nav-btn {
+    display: none;  /* не отображается */
+}
+
+
+@media (max-width: 1000px) {
+
+    .nav-btn {
+        display: block;
+        font-size: 2em;
+        padding-inline: 10px;
+        padding-bottom: 3px;
+        border: none;
+        background-color: rgb(29, 28, 28);
+        color: white;
+        cursor: pointer;
+    }
+
+    .links_nav {
+        display: none;
+    }
+
+    .nav-btn:hover {
+        background-color: rgb(29, 28, 28);
+    }
+    
+    .drop:hover .links_nav {
+        display: block;
+        position: absolute;
+        right: 0px;
+        background-color: rgb(29, 28, 28);
+    }
+
+    .navbar {
+        justify-content: space-between;
+    }
+}
